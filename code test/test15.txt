@@ -1,0 +1,106 @@
+import Button from './Button';
+import HomeIcon from './HomeIcon';
+import PlusIcon from './PlusIcon';
+
+function App() {
+  return (
+     <div id="app">
+      <section>
+        <h2>Filled Button (Default)</h2>
+        <p>
+          <Button>Default</Button>
+        </p>
+        <p>
+          <Button mode="filled">Filled (Default)</Button>
+        </p>
+      </section>
+      <section>
+        <h2>Button with Outline</h2>
+        <p>
+          <Button mode="outline">Outline</Button>
+        </p>
+      </section>
+      <section>
+        <h2>Text-only Button</h2>
+        <p>
+          <Button mode="text">Text</Button>
+        </p>
+      </section>
+      <section>
+        <h2>Button with Icon</h2>
+        <p>
+          <Button Icon={HomeIcon}>Home</Button>
+        </p>
+        <p>
+          <Button Icon={PlusIcon} mode="text">
+            Add
+          </Button>
+        </p>
+      </section>
+      <section>
+        <h2>Buttons Should Support Any Props</h2>
+        <p>
+          <Button mode="filled" disabled>
+            Disabled
+          </Button>
+        </p>
+        <p>
+          <Button onClick={() => console.log('Clicked!')}>Click me</Button>
+        </p>
+      </section>
+    </div>
+  );
+}
+
+export default App;
+
+
+export default function Button({ children, mode = 'filled', Icon, ...props}) {
+ // Todo: Build this component!
+ 
+ // !!! Important: 
+ // Wrap the icon with a <span className="button-icon"> to achieve the target look
+ // Also wrap the children prop with a <span>
+ // 根据mode选择类名
+  let cssClasses = `button ${mode}-button`;
+  
+  if(Icon){
+      cssClasses +=' icon-button'
+  }
+  
+  if(props.className){
+      cssClasses += ' ' + props.className;
+  }//这里不是必要
+  return (
+    <button className={cssClasses} {...props}>
+      {Icon && (
+          <span className="button-icon">
+          <Icon />
+          </span>)}
+      <span>{children}</span>
+    </button>
+  );
+}
+组件解释：
+组件参数：{ children, mode = 'filled', Icon, ...props }
+
+children：这是React的内置属性，代表组件的子元素。
+mode = 'filled'：mode属性默认值为'filled'。如果没有提供mode，它将自动设为'filled'。
+Icon：一个可选的图标组件。如果提供了，按钮将包含一个图标。
+...props：这是一个展开运算符，用于收集除children、mode和Icon之外的所有属性。
+CSS类名的构建
+
+let cssClasses = \button ${mode}-button`;`
+这里创建了一个基本的类名字符串，包括'button'和由mode决定的另一个类（例如'filled-button'）。
+if (Icon) { cssClasses += ' icon-button'; }
+如果存在Icon，则向类名字符串添加' icon-button'。注意字符串前的空格，这是为了确保类名之间有空格分隔。
+if (props.className) { cssClasses += ' ' + props.className; }
+如果props中有className，则将其添加到类名字符串中。这里的空格同样是为了分隔类名。
+渲染按钮
+
+<button className={cssClasses} {...props}>
+这里渲染了一个button元素，应用了之前构建的cssClasses。...props确保所有其他传递给组件的属性都应用于这个button。
+{Icon && (<span className="button-icon"><Icon /></span>)}
+这是条件渲染语句。如果Icon存在，将渲染一个包含Icon组件的span元素。
+<span>{children}</span>
+这个span包裹了children，即按钮内的内容。

@@ -1,0 +1,25 @@
+import Input from './Input';
+
+function App() {
+  return (
+
+    <div id="app">
+      <Input type="text" placeholder="Your name" />
+      <Input richText placeholder="Your message" />
+    </div>
+
+  );
+}
+
+export default App;
+export default function Input({ richText, ...props }) {
+  // return a <textarea> if a richText prop is true
+  // return an <input> otherwise
+  // forward / set the received props on the returned elements
+if (richText) {
+    return <textarea {...props} />;
+  }
+
+  // Otherwise, render an <input> with all forwarded props
+  return <input {...props} />;
+}

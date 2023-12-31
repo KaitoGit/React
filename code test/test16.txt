@@ -1,0 +1,54 @@
+import Review from './Review';
+import React from 'react';
+
+// don't change the Component name "App"
+function App() {
+    const [feedBack, setFeedBack] = React.useState('');
+    const [studentName, setStudentName] = React.useState('');
+    
+    function handleFeedBack(event) {
+        setFeedBack(event.target.value);
+    }
+    
+    function handleStudentName(event) {
+        setStudentName(event.target.value);
+    }
+    
+  return (
+    <>
+      <section id="feedback">
+        <h2>Please share some feedback</h2>
+        <p>
+          <label>Your Feedback</label>
+          <textarea onChange={handleFeedBack} value={feedBack} />
+        </p>
+        <p>
+          <label>Your Name</label>
+          <input type="text" onChange={handleStudentName} value={studentName}/>
+        </p>
+      </section>
+      <section id="draft">
+        <h2>Your feedback</h2>
+
+        <Review feedback={feedBack} student={studentName} />
+
+        <p>
+          <button>Save</button>
+        </p>
+      </section>
+    </>
+  );
+}
+
+export default App;
+
+export default function Review({ feedback, student }) {
+  return (
+    <figure>
+      <blockquote>
+        <p>{feedback}</p>
+      </blockquote>
+      <figcaption>{student}</figcaption>
+    </figure>
+  );
+}

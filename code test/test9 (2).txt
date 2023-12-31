@@ -1,0 +1,19 @@
+// IMPORTANT: You CAN'T import & use useState like this in this Udemy environment
+// import { useState } from 'react'
+// Instead, import & use it like this:
+import React from 'react';
+// React.useState();
+
+export default function App() {
+    const [ doDiscount, setDoDiscount] = React.useState(100);
+    function handleDiscount(){
+        setDoDiscount(75);
+    }
+    return (
+        <div>
+            <p data-testid="price">${doDiscount}</p>
+            <button onClick={handleDiscount}>
+            Apply Discount</button>
+        </div>
+    );
+}

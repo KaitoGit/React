@@ -1,0 +1,19 @@
+import React from 'react';
+
+// don't change the Component name "App"
+export default function App() {
+    const [isActive, setIsActive] = React.useState(false);
+    // 定义一个事件处理函数来切换状态
+    function toggleStyle() {
+        setIsActive(!isActive);
+    }
+
+    return (
+        <div>
+            {/* 根据isActive状态动态改变类名 */}
+            <p className={isActive ? 'active' :undefined}>Style me!</p>
+            {/* 绑定事件处理函数到按钮的onClick事件 */}
+            <button onClick={toggleStyle}>Toggle style</button>
+        </div>
+    );
+}
